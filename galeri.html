@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fotoğraf Galerisi | Seraquaspark</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0a121f;
+      color: #cdd6f4;
+      padding: 40px 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #73a1ff;
+      margin-bottom: 30px;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .gallery img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(80, 130, 255, 0.4);
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background-color: rgba(0, 15, 40, 0.9);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      flex-direction: column;
+    }
+    .modal img {
+      max-width: 90%;
+      max-height: 80vh;
+      border-radius: 12px;
+      box-shadow: 0 0 30px #5090ff;
+    }
+    .modal .controls {
+      margin-top: 20px;
+    }
+    .modal .controls button {
+      background: linear-gradient(45deg, #4a79ff, #2e5efc);
+      color: #e0e7ff;
+      border: none;
+      padding: 12px 25px;
+      margin: 0 15px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 12px;
+      font-weight: 700;
+      box-shadow: 0 3px 15px rgba(72, 106, 255, 0.8);
+      transition: background 0.4s ease;
+    }
+    .modal .controls button:hover {
+      background: linear-gradient(45deg, #73a1ff, #5090ff);
+    }
+  </style>
+</head>
+<body>
+
+<h1>Yaptığımız İşlerden Kareler</h1>
+
+<div class="gallery">
+  <img src="img/05576ed6-f7d7-49a2-858e-b2cb08030cfe.jpg" alt="Galeri görseli">
+  <img src="img/20023965-bbb1-4d7a-97e2-0de7abf86933.jpg" alt="Galeri görseli">
+  <img src="img/2113CD35-BCAE-4FBA-BFA6-2E40DDB2F15B.jpg" alt="Galeri görseli">
+  <img src="img/5b76d4f6-4a7f-48bb-ba44-f17d7864a2ff.jpg" alt="Galeri görseli">
+  <img src="img/62fe0ddd-2392-4b3e-b19f-c467ef12f137.jpg" alt="Galeri görseli">
+  <img src="img/7377510C-6D3A-4DA3-B952-D84A250F7421.jpg" alt="Galeri görseli">
+  <img src="img/9DFB96C6-8C93-4D31-8046-342A14762847.jpg" alt="Galeri görseli">
+  <img src="img/A821A09A-5EE9-410E-93AE-A9C550B88979.jpg" alt="Galeri görseli">
+  <img src="img/c7840bfc-f32e-4e60-a4b2-39b17fed888d.jpg" alt="Galeri görseli">
+  <img src="img/cafaca22-9860-450a-8c3f-82e8672b0927.jpg" alt="Galeri görseli">
+  <img src="img/d0a75caf-3d00-428b-891c-676b7691cd0d.jpg" alt="Galeri görseli">
+  <img src="img/e9f77524-8ae1-4671-ba1a-3053d78f128c.jpg" alt="Galeri görseli">
+  <img src="img/fb422393-354a-4260-b885-84917f09caa0.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0000.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0016.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0017.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0022.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0024.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0026.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0027.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0031.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0036.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0065.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0066.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0070.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0075.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0078.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0081.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0083.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0086.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0091.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0092.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0093.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0096.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0105.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0111.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0120.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0135.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0143.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0155.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0173.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0174.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0181.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0196.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0204.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250621-WA0206.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250622-WA0005.jpg" alt="Galeri görseli">
+  <img src="img/IMG-20250622-WA0006.jpg" alt="Galeri görseli">
+  <img src="img/IMG_5466.JPG" alt="Galeri görseli">
+  <img src="img/IMG_5497.JPG" alt="Galeri görseli">
+  <img src="img/IMG_5569.JPG" alt="Galeri görseli">
+  <img src="img/IMG_5598.JPG" alt="Galeri görseli">
+  <img src="img/IMG_5607.JPG" alt="Galeri görseli">
+  <img src="img/IMG_5616.JPG" alt="Galeri görseli">
+  <img src="img/IMG_5759.JPG" alt="Galeri görseli">
+</div>
+
+<div id="modal" class="modal">
+  <img id="modal-img" src="" alt="Büyük Görsel" />
+  <div class="controls">
+    <button id="prevBtn">◀ Geri</button>
+    <button id="nextBtn">İleri ▶</button>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Burada id değil class seçimi olmalı
+    const galleryImages = document.querySelectorAll(".gallery img");
+    const modal = document.getElementById("modal");
+    const modalImg = document.getElementById("modal-img");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    let currentIndex = 0;
+
+    function openModal(index) {
+      currentIndex = index;
+      modalImg.src = galleryImages[currentIndex].src;
+      modal.style.display = "flex";
+    }
+
+    function closeModal() {
+      modal.style.display = "none";
+    }
+
+    function showNext() {
+      currentIndex = (currentIndex + 1) % galleryImages.length;
+      modalImg.src = galleryImages[currentIndex].src;
+    }
+
+    function showPrev() {
+      currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+      modalImg.src = galleryImages[currentIndex].src;
+    }
+
+    galleryImages.forEach((img, index) => {
+      img.addEventListener("click", () => openModal(index));
+    });
+
+    // Modal dışına tıklayınca kapatma
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+
+    // İleri geri butonları tıklama olayları
+    nextBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      showNext();
+    });
+    prevBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      showPrev();
+    });
+  });
+</script>
+
+</body>
+</html>

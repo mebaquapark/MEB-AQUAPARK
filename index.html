@@ -1,11 +1,585 @@
-﻿<!doctype html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="utf-8">
-  <title>MEB AQUAPARK</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title> MEB | Profesyonel Kaydırak Hizmetleri</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: #0a121f; /* Koyu gece mavisi, siyah karışımı */
+      color: #cdd6f4; /* Açık mavi - okunaklı */
+    }
+
+    /* Intro ekran */
+    #intro-screen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: linear-gradient(135deg, #001f3f, #003366, #00509e);
+      color: #a8c0ff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      z-index: 99999;
+      transition: opacity 1s ease;
+    }
+    #intro-screen h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px #3a6fd8;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(to bottom, #001529, #003366);
+      padding: 60px 20px;
+      text-align: center;
+      color: #a8c0ff;
+      box-shadow: 0 4px 15px rgba(0, 48, 120, 0.7);
+    }
+    header h1 {
+      font-size: 2.8em;
+      margin-bottom: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px #5090ff;
+    }
+    header p {
+      font-size: 1.2em;
+      font-weight: 600;
+      text-shadow: 0 0 6px #3a6fd8;
+    }
+    header img {
+      width: 130px;
+      margin-bottom: 20px;
+      filter: drop-shadow(0 0 6px #1e3a8a);
+    }
+
+    /* Navigation */
+    nav {
+      background: #00264d;
+      padding: 12px 0;
+      text-align: center;
+      box-shadow: inset 0 -3px 10px rgba(0, 80, 160, 0.6);
+    }
+    nav a {
+      color: #a8c0ff;
+      text-decoration: none;
+      margin: 0 18px;
+      font-weight: 700;
+      font-size: 1.1em;
+      transition: color 0.3s ease;
+      text-shadow: 0 0 3px #5083d8;
+    }
+    nav a:hover {
+      color: #62a0ff;
+      text-shadow: 0 0 8px #5090ff;
+    }
+
+    /* Bölümler */
+    section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    /* Hizmet kutuları */
+    .services {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+    }
+    .service {
+      flex: 1 1 270px;
+      background: #112240; /* Çok koyu mavi-siyah */
+      padding: 25px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(80, 130, 255, 0.4);
+      transition: transform 0.3s ease;
+    }
+    .service:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 8px 25px rgba(80, 160, 255, 0.7);
+    }
+    .service h3 {
+      color: #73a1ff;
+      font-weight: 800;
+      margin-bottom: 15px;
+      text-shadow: 0 0 6px #7fb3ff;
+    }
+    .service p {
+      color: #acc6ff;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    /* Butonlar */
+    .discovery-button-container {
+      text-align: center;
+      margin-top: 45px;
+    }
+    .discovery-button {
+      background: linear-gradient(45deg, #4a79ff, #2e5efc);
+      color: #e0e7ff;
+      border: none;
+      padding: 16px 36px;
+      border-radius: 30px;
+      font-size: 18px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(72, 106, 255, 0.8);
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+    .discovery-button:hover {
+      background: linear-gradient(45deg, #73a1ff, #5090ff);
+      color: #eaf2ff;
+      box-shadow: 0 8px 25px rgba(112, 148, 255, 0.9);
+    }
+
+    /* Form */
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 14px;
+      margin: 12px 0;
+      border-radius: 8px;
+      border: 1.5px solid #4a79ff;
+      font-size: 16px;
+      font-weight: 500;
+      font-family: 'Roboto', sans-serif;
+      background: #1c2b54;
+      color: #d7e0ff;
+      transition: border-color 0.3s ease;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: #73a1ff;
+      box-shadow: 0 0 8px #5090ff;
+      background: #24365e;
+    }
+    .contact-form button {
+      background: linear-gradient(45deg, #4a79ff, #2e5efc);
+      color: #e0e7ff;
+      padding: 14px 36px;
+      border: none;
+      border-radius: 30px;
+      font-weight: 800;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(72, 106, 255, 0.8);
+      transition: background 0.4s ease;
+    }
+    .contact-form button:hover {
+      background: linear-gradient(45deg, #73a1ff, #5090ff);
+    }
+
+    /* Footer */
+    footer {
+      background: #001f3f;
+      color: #a8c0ff;
+      text-align: center;
+      padding: 25px 20px;
+      font-weight: 600;
+      font-size: 15px;
+      box-shadow: inset 0 3px 10px rgba(40, 60, 100, 0.7);
+    }
+    footer a {
+      color: #a8c0ff;
+      text-decoration: underline;
+      font-weight: 700;
+    }
+    footer a:hover {
+      color: #62a0ff;
+      text-shadow: 0 0 6px #5090ff;
+    }
+
+    /* WhatsApp butonu */
+    .whatsapp-button {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: linear-gradient(45deg, #25D366, #25D366);
+      color: #a8c0ff;
+      padding: 14px 22px;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: 17px;
+      text-decoration: none;
+      box-shadow: 0 5px 15px rgba(40, 70, 130, 0.8);
+      z-index: 999;
+      transition: background 0.4s ease;
+    }
+    .whatsapp-button:hover {
+      background: linear-gradient(45deg, #003366, #1ebe5d);
+      color: #d7e0ff;
+      box-shadow: 0 8px 25px rgba(80, 120, 210, 0.9);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .services {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    /* Scroll gallery stilleri */
+    .scroll-gallery {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 15px;
+      scroll-snap-type: x mandatory;
+      background: #12254f;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(40, 70, 120, 0.5);
+    }
+    .scroll-gallery img {
+      width: 300px;
+      height: 300px;
+      border-radius: 10px;
+      cursor: pointer;
+      scroll-snap-align: start;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 2px 10px rgba(40, 70, 120, 0.6);
+    }
+    .scroll-gallery img:hover {
+      transform: scale(1.12);
+      box-shadow: 0 6px 25px rgba(80, 120, 210, 0.9);
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 15, 40, 0.9);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      flex-direction: column;
+    }
+    .modal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 12px;
+      box-shadow: 0 0 30px #5090ff;
+    }
+    .modal .controls button {
+      background: linear-gradient(45deg, #4a79ff, #2e5efc);
+      color: #e0e7ff;
+      border: none;
+      padding: 12px 25px;
+      margin: 0 15px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 12px;
+      font-weight: 700;
+      box-shadow: 0 3px 15px rgba(72, 106, 255, 0.8);
+      transition: background 0.4s ease;
+    }
+    .modal .controls button:hover {
+      background: linear-gradient(45deg, #73a1ff, #5090ff);
+    }
+
+.referanslar {
+  padding: 50px 20px;
+  background: #0a121f;
+  text-align: center;
+}
+
+.referanslar h2 {
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #cdd6f4;
+}
+
+.logo-slider {
+  overflow: hidden;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.logo-track {
+  display: flex;
+  gap: 30px;
+  animation: slide 60s linear infinite;
+  width: max-content;
+}
+
+.logo-track img {
+  height: 80px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+
+.logo-track img:hover {
+  filter: grayscale(0%);
+}
+
+@keyframes slide {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+  </style>
 </head>
 <body>
-  <h1>Site çalışıyor!</h1>
-  <p>Bu, Netlify için ilk test sayfası.</p>
+
+<div id="intro-screen">
+  <img src="logo.png" alt="Logo" style="width: 220px; margin-bottom: 40px; filter: drop-shadow(0 0 10px #3a6fd8);" />
+  <h1>MEB Aquapark’a Hoş Geldiniz</h1>
+  <p>Siteye girmek için yukarı kaydırın veya dokunun</p>
+</div>
+
+<header>
+  <img src="logo.png" alt="MEB Aqua Logo" />
+  <h1>MEB Aquapark</h1>
+  <p>Aquapark Kaydırak Bakımı, Onarımı, Boyama, Montaj ve Kurulum</p>
+</header>
+
+<nav>
+  <a href="#hakkimizda">Hakkımızda</a>
+  <a href="#hizmetler">Hizmetler</a>
+  <a href="#iletisim">İletişim</a>
+</nav>
+
+<section id="hakkimizda">
+  <h2>Hakkımızda</h2>
+  <p>MEB Aquapark, yalnızca aquapark kaydırakları üzerine uzmanlaşmış bakım, onarım ve boyama hizmetleri sunan profesyonel bir kuruluştur. Tüm faaliyetlerimiz, tesislerin güvenliğini, estetiğini ve uzun ömürlü kullanımını esas alan kalite standartlarıyla yürütülmektedir. Deneyimli ekibimizle Türkiye'nin dört bir yanındaki aquaparklara hizmet veriyor, sezona eksiksiz bir başlangıç yapmanız için çalışıyoruz.</p>
+</section>
+
+<section class="referanslar">
+  <h2>Referanslarımız</h2>
+  <div class="logo-slider">
+    <div class="logo-track">
+<img src="referanslar/1(1).jpg" alt="Referans 1">
+<img src="referanslar/1(2).jpg" alt="Referans 2">
+<img src="referanslar/1(3).jpg" alt="Referans 3">
+<img src="referanslar/1(4).jpg" alt="Referans 4">
+<img src="referanslar/1(5).jpg" alt="Referans 5">
+<img src="referanslar/1(6).jpg" alt="Referans 6">
+<img src="referanslar/1(7).jpg" alt="Referans 7">
+<img src="referanslar/1(8).jpg" alt="Referans 8">
+<img src="referanslar/1(9).jpg" alt="Referans 9">
+<img src="referanslar/1(10).jpg" alt="Referans 10">
+<img src="referanslar/1(11).jpg" alt="Referans 11">
+<img src="referanslar/1(12).jpg" alt="Referans 12">
+<img src="referanslar/1(13).jpg" alt="Referans 13">
+<img src="referanslar/1(14).jpg" alt="Referans 14">
+<img src="referanslar/1(15).jpg" alt="Referans 15">
+<img src="referanslar/1(16).jpg" alt="Referans 16">
+<img src="referanslar/1(17).jpg" alt="Referans 17">
+<img src="referanslar/1(18).jpg" alt="Referans 18">
+<img src="referanslar/1(19).jpg" alt="Referans 19">
+<img src="referanslar/1(20).jpg" alt="Referans 20">
+<img src="referanslar/1(21).jpg" alt="Referans 21">
+<img src="referanslar/1(22).jpg" alt="Referans 22">
+<img src="referanslar/1(23).jpg" alt="Referans 23">
+<img src="referanslar/1(24).jpg" alt="Referans 24">
+<img src="referanslar/1(25).jpg" alt="Referans 25">
+<img src="referanslar/1(26).jpg" alt="Referans 26">
+<img src="referanslar/1(27).jpg" alt="Referans 27">
+<img src="referanslar/1(28).jpg" alt="Referans 28">
+<img src="referanslar/1(29).jpg" alt="Referans 29">
+<img src="referanslar/1(30).jpg" alt="Referans 30">
+<img src="referanslar/1(31).jpg" alt="Referans 31">
+<img src="referanslar/1(32).jpg" alt="Referans 32">
+<img src="referanslar/1(33).jpg" alt="Referans 33">
+<img src="referanslar/1(34).jpg" alt="Referans 34">
+<img src="referanslar/1(35).jpg" alt="Referans 35">
+<img src="referanslar/1(36).jpg" alt="Referans 36">
+<img src="referanslar/1(37).jpg" alt="Referans 37">
+<img src="referanslar/1(38).jpg" alt="Referans 38">
+<img src="referanslar/1(39).jpg" alt="Referans 39">
+<img src="referanslar/1(40).jpg" alt="Referans 40">
+<img src="referanslar/1(41).jpg" alt="Referans 41">
+<img src="referanslar/1(42).jpg" alt="Referans 42">
+<img src="referanslar/1(43).jpg" alt="Referans 43">
+<img src="referanslar/1(44).jpg" alt="Referans 44">
+<img src="referanslar/1(45).jpg" alt="Referans 45">
+<img src="referanslar/1(46).jpg" alt="Referans 46">
+<img src="referanslar/1(47).jpg" alt="Referans 47">
+<img src="referanslar/1(48).jpg" alt="Referans 48">
+<img src="referanslar/1(49).jpg" alt="Referans 49">
+<img src="referanslar/1(50).jpg" alt="Referans 50">
+<img src="referanslar/1(51).jpg" alt="Referans 51">
+<img src="referanslar/1(52).jpg" alt="Referans 52">
+<img src="referanslar/1(53).jpg" alt="Referans 53">
+<img src="referanslar/1(54).jpg" alt="Referans 54">
+<img src="referanslar/1(55).jpg" alt="Referans 55">
+<img src="referanslar/1(56).jpg" alt="Referans 56">
+<img src="referanslar/1(57).jpg" alt="Referans 57">
+<img src="referanslar/1(58).jpg" alt="Referans 58">
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <h2 style="text-align:center"> Öncesi Ve Sonrası </h2>
+  <div class="scroll-gallery" id="gallery">
+    <div class="image-wrapper"><img src="galeri-oncesi1.jpg" alt="Öncesi 1" onclick="openModal(0)" /><p>Öncesi</p></div>
+    <div class="image-wrapper"><img src="galeri-sonrasi1.jpg" alt="Sonrası 1" onclick="openModal(1)" /><p>Sonrası</p></div>
+    <div class="image-wrapper"><img src="galeri-oncesi2.jpg" alt="Öncesi 2" onclick="openModal(2)" /><p>Öncesi</p></div>
+    <div class="image-wrapper"><img src="galeri-sonrasi2.jpg" alt="Sonrası 2" onclick="openModal(3)" /><p>Sonrası</p></div>
+    <div class="image-wrapper"><img src="galeri-oncesi3.jpg" alt="Öncesi 3" onclick="openModal(4)" /><p>Öncesi</p></div>
+    <div class="image-wrapper"><img src="galeri-sonrasi3.jpg" alt="Sonrası 3" onclick="openModal(5)" /><p>Sonrası</p></div>
+    <div class="image-wrapper"><img src="galeri-oncesi4.jpg" alt="Öncesi 4" onclick="openModal(6)" /><p>Öncesi</p></div>
+    <div class="image-wrapper"><img src="galeri-sonrasi4.jpg" alt="Sonrası 4" onclick="openModal(7)" /><p>Sonrası</p></div>
+    <div class="image-wrapper"><img src="galeri-oncesi5.jpg" alt="Öncesi 5" onclick="openModal(8)" /><p>Öncesi</p></div>
+    <div class="image-wrapper"><img src="galeri-sonrasi5.jpg" alt="Sonrası 5" onclick="openModal(9)" /><p>Sonrası</p></div>
+  </div>
+</section>
+
+<section class="section">
+  <h2 style="text-align:center;">Yaptığımız İşlerden Örnekler</h2>
+  <div class="scroll-gallery">
+    <img src="IMG-20250621-WA0001.jpg" alt="İş 1">
+    <img src="IMG-20250621-WA0002.jpg" alt="İş 2">
+    <img src="IMG-20250621-WA0003.jpg" alt="İş 3">
+  </div>
+  <div class="discovery-button-container">
+    <a href="galeri.html" class="discovery-button">Tüm Galeriyi Gör</a>
+  </div>
+</section>
+
+<div id="modal" class="modal" onclick="closeModal()">
+  <img id="modal-img" src="" alt="Büyük Görsel" />
+  <div class="controls">
+    <button onclick="prevImage(event)">◀ Geri</button>
+    <button onclick="nextImage(event)">İleri ▶</button>
+  </div>
+</div>
+
+<section id="hizmetler">
+  <h2>Hizmetlerimiz</h2>
+  <div class="services">
+    <div class="service">
+      <h3>Kaydırak Bakımı</h3>
+      <p>Sezon öncesi yapılan detaylı bakım çalışmaları ile kaydırakların tüm yüzeyleri profesyonelce temizlenir, yıpranmış silikonlar yenilenir ve yapısal kontroller gerçekleştirilir.</p>
+    </div>
+    <div class="service">
+      <h3>Onarım</h3>
+      <p>Kırılmış, çatlamış ya da bağlantı noktalarında sorun bulunan kaydırak parçaları uzman ekibimiz tarafından onarılır.</p>
+    </div>
+    <div class="service">
+      <h3>Boyama</h3>
+      <p>Kaydırak yüzeyleri, UV ışınlarına dayanıklı ve kaydıraklar için özel üretilmiş boyalarla yeniden boyanır.</p>
+    </div>
+    <div class="service">
+      <h3>Montaj ve Kurulum</h3>
+      <p>MEB Aquapark olarak yalnızca bakım ve onarım değil, aynı zamanda yeni projelerde kaydırak sistemlerinin sıfırdan montaj ve kurulum hizmetlerini de sunuyoruz. Deneyimli teknik ekibimiz, taşıyıcı yapıların montajı, bağlantı sistemlerinin kurulumu, sızdırmazlık kontrolleri ve ilk kullanım testlerini eksiksiz şekilde gerçekleştirir. Yeni aquapark tesisleri veya mevcut tesislerin kapasite artırımı projelerinde, hızlı ve güvenli kurulum çözümleriyle yanınızdayız.</p>
+    </div>
+  </div>
+  <div class="discovery-button-container">
+    <button class="discovery-button" onclick="document.getElementById('iletisim').scrollIntoView({ behavior: 'smooth' });">Ücretsiz Keşif Talep Et</button>
+  </div>
+</section>
+ 
+<section id="blog">
+  <h2>Faydalı Bilgiler</h2>
+  <article>
+  <h3>Aquapark Kaydıraklarında Neden Silikon Yenilenmeli?</h3>
+  <p>
+    Kaydırak bağlantı noktalarında kullanılan silikonlar, zamanla su ve güneş ışığına maruz kalarak özelliğini kaybeder. Bu da su kaçaklarına, estetik bozulmalara ve güvenlik sorunlarına yol açabilir. Sezon öncesi silikon yenileme işlemi, kaydırakların uzun ömürlü ve sorunsuz çalışmasını sağlar.
+  </p>
+  <article>
+  <h3>Kaydırak Boyası Ne Sıklıkla Yenilenmeli?</h3>
+  <p>
+    Güneş ışınları (UV), kimyasallar ve havuz suyunun etkisiyle zamanla kaydırak yüzeylerinde renk solması ve yüzey aşınmaları oluşur. Bu yüzden kaydırak boyalarının her 2-3 yılda bir, özel UV dayanımlı boyalarla yenilenmesi önerilir. Bu işlem hem görsel kaliteyi artırır hem de yüzey koruması sağlar.
+  </p>
+  <article>
+  <h3>Sezon Öncesi Kaydırak Bakımı Ne Zaman Yapılmalı?</h3>
+  <p>
+    Aquapark sezonu başlamadan en az 1 ay önce, tüm kaydırakların detaylı bakım ve kontrolü yapılmalıdır. Silikon yenileme, kırıkların onarımı ve boya işlemleri için bu dönem en ideal zamandır. Sezon yoğunluğu başlamadan yapılan bakım, zaman kazandırır ve olası riskleri önler.
+  </p>
+
+<section id="iletisim">
+  <h2>İletişim</h2>
+  <form action="https://formspree.io/f/xeolwonj" method="POST" class="contact-form">
+    <input type="text" name="name" placeholder="Adınız" required />
+    <input type="email" name="email" placeholder="E-posta" required />
+    <textarea name="message" rows="5" placeholder="Mesajınız" required></textarea>
+    <button type="submit">Gönder</button>
+  </form>
+</section>
+
+<footer>
+  <p>&copy; 2025 MEB Aquapark | Tüm Hakları Saklıdır | 📞 0533 575 48 76 | 📧 MEBaquapark@gmail.com | 📍<a href="https://www.google.com/maps?q=Mustafa+Kemal+Mahallesi+2.+Çam+Sokak+No+20/A+Turgutlu+Manisa" target="_blank"> Mustafa Kemal Mahallesi 2. Çam Sokak No:20/A Turgutlu / Manisa </p>
+  </a></p>
+</footer>
+
+<a class="whatsapp-button" href="https://wa.me/905335754876" target="_blank">💬 WhatsApp</a>
+
+<script>
+  const galleryImages = [
+    "galeri-oncesi1.jpg",
+    "galeri-sonrasi1.jpg",
+    "galeri-oncesi2.jpg",
+    "galeri-sonrasi2.jpg",
+    "galeri-oncesi3.jpg",
+    "galeri-sonrasi3.jpg",
+    "galeri-oncesi4.jpg",
+    "galeri-sonrasi4.jpg",
+    "galeri-oncesi5.jpg",
+    "galeri-sonrasi5.jpg"
+  ];
+
+  let currentIndex = 0;
+
+  function openModal(index) {
+    currentIndex = index;
+    const modal = document.getElementById("modal");
+    const modalImg = document.getElementById("modal-img");
+    modalImg.src = galleryImages[currentIndex];
+    modal.style.display = "flex";
+  }
+
+  function closeModal() {
+    document.getElementById("modal").style.display = "none";
+  }
+
+  function nextImage(e) {
+    e.stopPropagation();
+    currentIndex = (currentIndex + 1) % galleryImages.length;
+    document.getElementById("modal-img").src = galleryImages[currentIndex];
+  }
+
+  function prevImage(e) {
+    e.stopPropagation();
+    currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+    document.getElementById("modal-img").src = galleryImages[currentIndex];
+  }
+
+  const intro = document.getElementById('intro-screen');
+  let introGone = false;
+
+  function hideIntro() {
+    if (!introGone) {
+      intro.style.opacity = '0';
+      setTimeout(() => {
+        intro.style.display = 'none';
+      }, 1000);
+      introGone = true;
+    }
+  }
+
+  window.addEventListener('click', hideIntro);
+  window.addEventListener('scroll', hideIntro);
+  window.addEventListener('touchstart', hideIntro);
+</script>
+
 </body>
 </html>
